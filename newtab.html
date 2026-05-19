@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="dark">
+  <title>New Tab</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div id="wallpaper-bg"></div>
+  <div id="wallpaper-credit"></div>
+  <div id="app">
+
+    <!-- Header: greeting, clock, weather -->
+    <header id="header">
+      <div id="header-left">
+        <div id="greeting">Welcome</div>
+        <div id="date-display"></div>
+      </div>
+      <div id="header-center">
+        <div id="clock-container">
+          <div id="clock">00:00</div>
+          <button id="clock-mode-btn" title="Cycle clock style">Numeric</button>
+        </div>
+      </div>
+      <div id="header-right">
+        <div id="weather-container">
+          <div id="weather-widget">
+            <span id="weather-icon"></span>
+            <span id="weather-temp"></span>
+            <span id="weather-desc"></span>
+            <button id="weather-refresh-btn" title="Different phrase">↻</button>
+          </div>
+          <button id="weather-mode-btn" title="Cycle weather display style">Normal</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Daily intention -->
+    <div id="intention-bar">
+      <span class="intention-label">Today's intention</span>
+      <input type="text" id="intention-input" placeholder="What's the one thing you want to accomplish today?" maxlength="140" autocomplete="off" spellcheck="false">
+    </div>
+
+    <!-- Search -->
+    <section id="search-section">
+      <div id="search-top-row">
+        <div id="search-engine-tabs">
+          <button class="engine-tab active" data-engine="google">Google</button>
+          <button class="engine-tab" data-engine="bing">Bing</button>
+          <button class="engine-tab" data-engine="duckduckgo">DuckDuckGo</button>
+        </div>
+        <button id="bang-help-btn" title="Search shortcuts (!bangs)">!?</button>
+      </div>
+      <form id="search-form">
+        <div id="search-input-wrapper">
+          <input type="text" id="search-input" placeholder="Search Google..." autofocus autocomplete="off">
+          <button type="submit" id="search-btn" aria-label="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- This day in history -->
+    <div id="history-strip">
+      <span id="history-emoji">📅</span>
+      <strong id="history-year"></strong>
+      <span id="history-sep">—</span>
+      <span id="history-text">Loading…</span>
+      <button id="history-next" title="Another event">↻</button>
+    </div>
+
+    <!-- Quote of the day -->
+    <div id="quote-strip">
+      <span id="quote-text">Loading…</span>
+      <span id="quote-sep">—</span>
+      <strong id="quote-author"></strong>
+      <button id="quote-next" title="Another quote">↻</button>
+    </div>
+
+    <!-- Main content panels -->
+    <main id="main">
+      <div id="panel-tabs">
+        <button class="panel-tab active" data-panel="bookmarks">Bookmarks</button>
+        <button class="panel-tab" data-panel="notes">Notes</button>
+        <button class="panel-tab" data-panel="tasks">Tasks</button>
+        <button class="panel-tab" data-panel="recent">Recent Tabs</button>
+      </div>
+
+      <!-- Bookmarks -->
+      <div id="panel-bookmarks" class="panel active">
+        <div id="bookmark-group-bar">
+          <div id="bookmark-group-tabs"></div>
+          <button id="add-group-btn" title="New group">+</button>
+        </div>
+        <div id="bookmarks-grid"></div>
+        <button class="add-btn" id="add-bookmark-btn">+ Add Bookmark</button>
+      </div>
+
+      <!-- Notes -->
+      <div id="panel-notes" class="panel">
+        <div id="notes-list"></div>
+        <button class="add-btn" id="add-note-btn">+ New Note</button>
+      </div>
+
+      <!-- Tasks -->
+      <div id="panel-tasks" class="panel">
+        <div id="tasks-toolbar">
+          <button id="tasks-refresh-btn" class="tasks-action-btn" title="Refresh">↻ Refresh</button>
+          <a href="https://tasks.google.com" target="_blank" rel="noopener noreferrer" class="tasks-action-btn">Open Google Tasks ↗</a>
+        </div>
+        <div id="tasks-list"></div>
+      </div>
+
+      <!-- Recent Tabs -->
+      <div id="panel-recent" class="panel">
+        <div id="recent-list"></div>
+      </div>
+
+
+    </main>
+
+  </div><!-- #app -->
+
+  <!-- Bottom toolbar -->
+  <div id="bottom-toolbar">
+    <div id="ambient-player">
+      <button class="toolbar-btn" id="ambient-btn" title="Ambient sounds">♪</button>
+      <div id="ambient-panel" class="hidden">
+        <div id="ambient-panel-header">
+          <span>Ambient Sounds</span>
+          <button id="ambient-close">×</button>
+        </div>
+        <select id="ambient-type">
+          <option value="rain">🌧 Rain</option>
+          <option value="ocean">🌊 Ocean</option>
+          <option value="fire">🔥 Fireplace</option>
+          <option value="brown">Brown Noise</option>
+          <option value="white">White Noise</option>
+          <option value="pink">Pink Noise</option>
+        </select>
+        <div id="ambient-vol-row">
+          <span>Vol</span>
+          <input type="range" id="ambient-volume" min="0" max="1" step="0.05" value="0.4">
+        </div>
+        <button id="ambient-play-btn" class="btn-primary">▶ Play</button>
+      </div>
+    </div>
+    <button class="toolbar-btn" id="settings-btn" title="Options">⚙</button>
+  </div>
+
+  <!-- Modal: Add Bookmark -->
+  <div id="modal-add-bookmark" class="modal hidden">
+    <div class="modal-content">
+      <h2>Add Bookmark</h2>
+      <label>URL<input type="url" id="bookmark-url" placeholder="https://..."></label>
+      <label>Title <span class="label-hint">(optional — auto-fills from domain)</span>
+        <input type="text" id="bookmark-title" placeholder="My Site">
+      </label>
+      <div class="modal-actions">
+        <div></div>
+        <div>
+          <button class="btn-secondary" id="cancel-bookmark">Cancel</button>
+          <button class="btn-primary" id="confirm-bookmark">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Group -->
+  <div id="modal-add-group" class="modal hidden">
+    <div class="modal-content">
+      <h2>New Group</h2>
+      <label>Name<input type="text" id="group-name" placeholder="e.g. Work, Social, News..."></label>
+      <div class="modal-actions">
+        <div></div>
+        <div>
+          <button class="btn-secondary" id="cancel-group">Cancel</button>
+          <button class="btn-primary" id="confirm-group">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Note Editor -->
+  <div id="modal-note" class="modal modal-large hidden">
+    <div class="modal-content note-editor">
+      <input type="text" id="note-title-input" placeholder="Note title...">
+      <textarea id="note-content-input" placeholder="Start writing..."></textarea>
+      <div class="modal-actions">
+        <button class="btn-danger" id="delete-note-btn">Delete</button>
+        <div>
+          <button class="btn-secondary" id="cancel-note">Cancel</button>
+          <button class="btn-primary" id="save-note">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Bang shortcuts -->
+  <div id="modal-bangs" class="modal modal-large hidden">
+    <div class="modal-content">
+      <h2>Search Shortcuts (!bangs)</h2>
+      <p class="bang-intro">Type <code>!bang query</code> or <code>query !bang</code> in the search bar to jump straight to a site.<br>
+      Example: <code>!yt lo-fi music</code> searches YouTube directly.</p>
+      <div id="bang-table"></div>
+      <div class="modal-actions"><div></div><button class="btn-secondary" id="close-bangs">Close</button></div>
+    </div>
+  </div>
+
+  <!-- Backdrop -->
+  <div id="modal-backdrop" class="hidden"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

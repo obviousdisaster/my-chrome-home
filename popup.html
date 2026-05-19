@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="dark">
+  <title>Quick Note</title>
+  <link rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+  <div id="popup">
+
+    <header id="popup-header">
+      <span id="popup-title">Quick Note</span>
+      <span id="note-count"></span>
+    </header>
+
+    <div id="form-area">
+      <input  type="text" id="p-title"   placeholder="Title (optional)">
+      <textarea            id="p-content" placeholder="Start writing..." rows="6"></textarea>
+      <div id="form-footer">
+        <span id="status-msg"></span>
+        <button id="save-btn">Save</button>
+      </div>
+    </div>
+
+    <a id="open-tab-link" href="newtab.html" target="_blank">Open My Chrome Home →</a>
+
+  </div>
+  <script src="js/popup.js"></script>
+</body>
+</html>

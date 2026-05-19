@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="dark">
+  <title>My Chrome Home — Options</title>
+  <link rel="stylesheet" href="css/options.css">
+</head>
+<body>
+  <div id="options-app">
+    <h1>My Chrome Home Settings</h1>
+
+    <section>
+      <h2>Appearance</h2>
+      <label class="opt-row">
+        <span>Accent colour</span>
+        <input type="color" id="opt-accent" value="#58a6ff">
+      </label>
+      <label class="opt-row">
+        <span>Layout width</span>
+        <select id="opt-layout-width">
+          <option value="boxed">Boxed (1080px)</option>
+          <option value="full">Full width</option>
+        </select>
+      </label>
+    </section>
+
+    <section>
+      <h2>Wallpaper</h2>
+      <label class="opt-row">
+        <span>Source</span>
+        <select id="opt-wallpaper-source">
+          <option value="bing">Bing Photo of the Day</option>
+          <option value="nasa">NASA Astronomy Picture of the Day</option>
+          <option value="solid">Solid colour</option>
+          <option value="custom">Custom image URL</option>
+        </select>
+      </label>
+
+      <div id="opt-nasa-row" class="opt-sub hidden">
+        <label class="opt-row">
+          <span>NASA API key
+            <a href="https://api.nasa.gov/" target="_blank" rel="noopener noreferrer">(get one free)</a>
+          </span>
+          <input type="text" id="opt-nasa-key" placeholder="Leave blank for DEMO_KEY">
+        </label>
+      </div>
+
+      <div id="opt-solid-row" class="opt-sub hidden">
+        <label class="opt-row">
+          <span>Background colour</span>
+          <input type="color" id="opt-solid-color" value="#0d1117">
+        </label>
+      </div>
+
+      <div id="opt-custom-row" class="opt-sub hidden">
+        <label class="opt-row">
+          <span>Image URL</span>
+          <input type="url" id="opt-custom-url" placeholder="https://...">
+        </label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Quote of the day</h2>
+      <label class="opt-row">
+        <span>Category</span>
+        <select id="opt-quote-category">
+          <option value="All">All categories</option>
+          <option value="Age">Age</option>
+          <option value="Business">Business</option>
+          <option value="Change">Change</option>
+          <option value="Character">Character</option>
+          <option value="Competition">Competition</option>
+          <option value="Conservative">Conservative</option>
+          <option value="Courage">Courage</option>
+          <option value="Creativity">Creativity</option>
+          <option value="Education">Education</option>
+          <option value="Ethics">Ethics</option>
+          <option value="Failure">Failure</option>
+          <option value="Faith">Faith</option>
+          <option value="Family">Family</option>
+          <option value="Famous Quotes">Famous Quotes</option>
+          <option value="Film">Film</option>
+          <option value="Freedom">Freedom</option>
+          <option value="Friendship">Friendship</option>
+          <option value="Future">Future</option>
+          <option value="Generosity">Generosity</option>
+          <option value="Genius">Genius</option>
+          <option value="Gratitude">Gratitude</option>
+          <option value="Happiness">Happiness</option>
+          <option value="Health">Health</option>
+          <option value="History">History</option>
+          <option value="Honor">Honor</option>
+          <option value="Humorous">Humorous</option>
+          <option value="Imagination">Imagination</option>
+          <option value="Inspirational">Inspirational</option>
+          <option value="Knowledge">Knowledge</option>
+          <option value="Leadership">Leadership</option>
+          <option value="Life">Life</option>
+          <option value="Literature">Literature</option>
+          <option value="Love">Love</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Motivational">Motivational</option>
+          <option value="Nature">Nature</option>
+          <option value="Opportunity">Opportunity</option>
+          <option value="Pain">Pain</option>
+          <option value="Perseverance">Perseverance</option>
+          <option value="Philosophy">Philosophy</option>
+          <option value="Politics">Politics</option>
+          <option value="Power Quotes">Power Quotes</option>
+          <option value="Religion">Religion</option>
+          <option value="Sadness">Sadness</option>
+          <option value="Science">Science</option>
+          <option value="Self Help">Self Help</option>
+          <option value="Self">Self</option>
+          <option value="Social Justice">Social Justice</option>
+          <option value="Society">Society</option>
+          <option value="Spirituality">Spirituality</option>
+          <option value="Sports">Sports</option>
+          <option value="Stupidity">Stupidity</option>
+          <option value="Success">Success</option>
+          <option value="Technology">Technology</option>
+          <option value="Time">Time</option>
+          <option value="Tolerance">Tolerance</option>
+          <option value="Truth">Truth</option>
+          <option value="Virtue">Virtue</option>
+          <option value="War">War</option>
+          <option value="Weakness">Weakness</option>
+          <option value="Wellness">Wellness</option>
+          <option value="Wisdom">Wisdom</option>
+          <option value="Work">Work</option>
+        </select>
+      </label>
+    </section>
+
+    <section>
+      <h2>Show / hide</h2>
+      <label class="opt-toggle"><input type="checkbox" id="opt-show-clock">      Clock</label>
+      <label class="opt-toggle"><input type="checkbox" id="opt-show-date">       Date</label>
+      <label class="opt-toggle"><input type="checkbox" id="opt-show-greeting">   Greeting</label>
+      <label class="opt-toggle"><input type="checkbox" id="opt-show-weather">    Weather widget</label>
+      <label class="opt-toggle"><input type="checkbox" id="opt-show-intention">  Daily intention bar</label>
+      <label class="opt-toggle"><input type="checkbox" id="opt-show-history">    This day in history</label>
+      <label class="opt-toggle"><input type="checkbox" id="opt-show-quotes">     Quote of the day</label>
+      <label class="opt-toggle"><input type="checkbox" id="opt-show-sounds">     Ambient sounds button</label>
+      <label class="opt-toggle"><input type="checkbox" id="opt-show-credit">     Wallpaper credit</label>
+    </section>
+
+    <div id="save-status"></div>
+  </div>
+  <script src="js/options.js"></script>
+</body>
+</html>
